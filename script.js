@@ -139,7 +139,7 @@ function setMenu(open) {
 }
 menuBtn.addEventListener("click", () => setMenu(menuBtn.getAttribute("aria-expanded") !== "true"));
 menuLinks.forEach((a) => {
-  a.addEventListener("click", () => setMenu(false));
+  a.addEventListener("click", () => { if (isCalm()) setMenu(false); }); // con movimiento, la cortina lo cierra tapada
   a.addEventListener("pointerenter", () => previewMenu(a.dataset.img));
   a.addEventListener("focus", () => previewMenu(a.dataset.img));
 });
@@ -258,7 +258,7 @@ const shareBtn = document.querySelector("[data-share]");
 function flash(btn, text) {
   const label = btn.querySelector("span");
   const icon = btn.querySelector("use");
-  const prev = [label.textContent, icon.getAttribute("href")];
+  const prev = [label.dataset.text || label.textContent, icon.getAttribute("href")];
   btn.classList.add("is-done");
   label.textContent = text;
   icon.setAttribute("href", "#i-check");
@@ -291,3 +291,153 @@ if (navigator.share) {
 } else {
   shareBtn.hidden = true;
 }
+
+/* ---------- Hovers y transiciones estilo estudio ---------- */
+
+const finePointer = matchMedia("(hover: hover) and (pointer: fine)");
+const escapeChar = (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" })[c] || c;
+
+// Texto que rueda: cada letra lleva su copia debajo (text-shadow) y sube al pasar el mouse.
+function splitRoll(el) {
+  const text = el.textContent.trim();
+  if (!text) return;
+  el.dataset.text = text;
+  el.innerHTML = `<span class="sr-only">${[...text].map(escapeChar).join("")}</span><span class="roll" aria-hidden="true">${[...text].map((c, i) => `<span class="ch" style="--i:${i}">${escapeChar(c)}</span>`).join("")}</span>`;
+}
+
+const rollLabels = [document.querySelector(".menu-label")];
+document.querySelectorAll(".btn").forEach((btn) => {
+  let label = btn.querySelector(":scope > span");
+  if (!label) {
+    // Botón con texto suelto: se envuelve para poder animarlo.
+    const node = [...btn.childNodes].find((n) => n.nodeType === 3 && n.textContent.trim());
+    if (!node) return;
+    label = document.createElement("span");
+    label.textContent = node.textContent.trim();
+    node.replaceWith(" ", label, " ");
+  }
+  rollLabels.push(label);
+});
+
+// Las etiquetas que cambian de texto (Menú/Cerrar, Copiado) se vuelven a dividir.
+const rollObserver = new MutationObserver((records) => {
+  records.forEach(({ target }) => {
+    if (!target.querySelector(".roll")) splitRoll(target);
+  });
+});
+rollLabels.forEach((el) => {
+  splitRoll(el);
+  rollObserver.observe(el, { childList: true });
+});
+
+// Botones magnéticos
+document.querySelectorAll(".btn, .menu-btn, .brand").forEach((el) => {
+  el.setAttribute("data-magnetic", "");
+  el.addEventListener("pointermove", (e) => {
+    if (!finePointer.matches || isCalm()) return;
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left - r.width / 2) * 0.28;
+    const y = (e.clientY - r.top - r.height / 2) * 0.4;
+    el.classList.add("is-pulled");
+    el.style.translate = `${x.toFixed(1)}px ${y.toFixed(1)}px`;
+  });
+  el.addEventListener("pointerleave", () => {
+    el.classList.remove("is-pulled");
+    el.style.translate = "";
+  });
+});
+
+// Cursor propio con inercia
+const cursor = document.createElement("div");
+cursor.className = "cursor";
+cursor.setAttribute("aria-hidden", "true");
+cursor.innerHTML = '<span class="cursor-ring"><em>Ver</em></span><span class="cursor-dot"></span>';
+document.body.append(cursor);
+const ring = cursor.querySelector(".cursor-ring");
+const dot = cursor.querySelector(".cursor-dot");
+const cursorLabel = cursor.querySelector("em");
+const cur = { x: -100, y: -100, rx: -100, ry: -100, on: false };
+
+function cursorLoop() {
+  cur.rx += (cur.x - cur.rx) * 0.16;
+  cur.ry += (cur.y - cur.ry) * 0.16;
+  ring.style.transform = `translate3d(${cur.rx}px, ${cur.ry}px, 0)`;
+  dot.style.transform = `translate3d(${cur.x}px, ${cur.y}px, 0)`;
+  if (cur.on) requestAnimationFrame(cursorLoop);
+}
+function syncCursor() {
+  const on = finePointer.matches && !isCalm();
+  root.classList.toggle("has-cursor", on);
+  if (on && !cur.on) requestAnimationFrame(cursorLoop);
+  cur.on = on;
+}
+addEventListener("pointermove", (e) => {
+  cur.x = e.clientX;
+  cur.y = e.clientY;
+  const t = e.target.closest?.("[data-spot], .city-fig, .qr-frame, a, button");
+  const media = !!t && t.matches("[data-spot], .city-fig, .qr-frame");
+  cursor.classList.toggle("is-media", media);
+  cursor.classList.toggle("is-link", !!t && !media);
+  cursorLabel.textContent = t?.matches(".qr-frame") ? "Escanea" : "Ver";
+}, { passive: true });
+addEventListener("pointerdown", () => cursor.classList.add("is-down"));
+addEventListener("pointerup", () => cursor.classList.remove("is-down"));
+document.documentElement.addEventListener("pointerleave", () => cursor.classList.add("is-hidden"));
+document.documentElement.addEventListener("pointerenter", () => cursor.classList.remove("is-hidden"));
+
+// Scroll con inercia (sólo rueda del mouse; teclado, barra y táctil quedan nativos)
+const smooth = { target: scrollY, current: scrollY, running: false };
+function smoothLoop() {
+  if (!smooth.running) return;
+  smooth.current += (smooth.target - smooth.current) * 0.1;
+  if (Math.abs(smooth.target - smooth.current) < 0.5) {
+    smooth.current = smooth.target;
+    smooth.running = false;
+  }
+  window.scrollTo({ top: smooth.current, behavior: "instant" });
+  if (smooth.running) requestAnimationFrame(smoothLoop);
+}
+addEventListener("wheel", (e) => {
+  if (!finePointer.matches || isCalm() || e.ctrlKey || menu.classList.contains("is-open") || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+  e.preventDefault();
+  if (!smooth.running) smooth.current = smooth.target = scrollY;
+  const max = root.scrollHeight - innerHeight;
+  const step = e.deltaY * (e.deltaMode === 1 ? 36 : e.deltaMode === 2 ? innerHeight : 1);
+  smooth.target = Math.min(max, Math.max(0, smooth.target + step));
+  if (!smooth.running) { smooth.running = true; requestAnimationFrame(smoothLoop); }
+}, { passive: false });
+
+// Cortina entre secciones
+const curtain = document.createElement("div");
+curtain.className = "curtain";
+curtain.setAttribute("aria-hidden", "true");
+curtain.innerHTML = "<span>VI</span>";
+document.body.append(curtain);
+
+document.addEventListener("click", (e) => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a || a.classList.contains("skip") || e.metaKey || e.ctrlKey || isCalm()) return;
+  const id = a.getAttribute("href");
+  const dest = id === "#top" ? document.body : document.querySelector(id);
+  if (!dest) return;
+  e.preventDefault();
+  smooth.running = false;
+  curtain.classList.remove("is-out");
+  curtain.classList.add("is-in");
+  setTimeout(() => {
+    if (menu.classList.contains("is-open")) setMenu(false);
+    const top = id === "#top" ? 0 : dest.getBoundingClientRect().top + scrollY;
+    window.scrollTo({ top, behavior: "instant" });
+    smooth.target = smooth.current = top;
+    history.replaceState(null, "", id);
+    const heading = dest.querySelector("h1, h2") || dest;
+    heading.setAttribute("tabindex", "-1");
+    heading.focus({ preventScroll: true });
+    curtain.classList.add("is-out");
+    setTimeout(() => curtain.classList.remove("is-in", "is-out"), 800);
+  }, 650);
+});
+
+syncCursor();
+calmBtn.addEventListener("click", syncCursor);
+finePointer.addEventListener?.("change", syncCursor);
