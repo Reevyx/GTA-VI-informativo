@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Rumbo a Vice City · GTA VI</title>
+  <meta name="description" content="Página fan del lanzamiento de GTA VI que se explica a sí misma: cómo está hecha, cómo se mueve y cómo llegó a tu pantalla.">
+  <meta name="theme-color" content="#0c0d0c">
+  <meta property="og:title" content="Rumbo a Vice City · GTA VI">
+  <meta property="og:description" content="Una autopista hacia el 19 de noviembre de 2026. Página fan, no oficial.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M8 14Q29 4 50 14Q71 4 92 14V44C92 70 74 86 50 96 26 86 8 70 8 44Z' fill='%23123f8c' stroke='%23fff' stroke-width='5'/%3E%3Cpath d='M8 14Q29 4 50 14Q71 4 92 14V34H8Z' fill='%23c4202b'/%3E%3Ctext x='50' y='76' font-family='Arial' font-weight='700' font-size='38' fill='%23fff' text-anchor='middle'%3EVI%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@500;700&family=Overpass:ital,wght@0,400;0,600;0,800;0,900;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <svg width="0" height="0" class="sr-only" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v17M5 13l7 7 7-7"/></symbol>
+      <symbol id="i-exit" viewBox="0 0 24 24"><path d="M6 18 18 6M8 6h10v10"/></symbol>
+      <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 21V4M5 11l7-7 7 7"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></symbol>
+      <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V3M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+      <symbol id="shield" viewBox="0 0 100 100">
+        <path d="M8 14Q29 4 50 14Q71 4 92 14V44C92 70 74 86 50 96 26 86 8 70 8 44Z" fill="#123f8c"/>
+        <path d="M8 14Q29 4 50 14Q71 4 92 14V33H8Z" fill="#c4202b"/>
+        <path d="M8 14Q29 4 50 14Q71 4 92 14V44C92 70 74 86 50 96 26 86 8 70 8 44Z" fill="none" stroke="#fff" stroke-width="4"/>
+        <path d="M8 33H92" stroke="#fff" stroke-width="3"/>
+        <text x="50" y="27" font-family="Overpass, sans-serif" font-weight="800" font-size="11" letter-spacing="1" fill="#fff" text-anchor="middle">LEONIDA</text>
+        <text x="50" y="77" font-family="Overpass, sans-serif" font-weight="900" font-size="40" fill="#fff" text-anchor="middle">VI</text>
+      </symbol>
+    </defs>
+  </svg>
+
+  <a class="skip" href="#salida-1">Saltar al contenido</a>
+
+  <div class="beam" aria-hidden="true"></div>
+
+  <header class="gantry" id="top">
+    <a class="gantry-brand" href="#top" aria-label="Inicio">
+      <svg class="gantry-shield" aria-hidden="true"><use href="#shield"/></svg>
+      <span>Leonida <b>Tpk</b></span>
+    </a>
+    <button class="gantry-toggle" type="button" aria-expanded="false" aria-controls="exits">
+      <svg class="ico" aria-hidden="true"><use href="#i-menu"/></svg>
+      <span>Salidas</span>
+    </button>
+    <nav class="exits" id="exits" aria-label="Salidas">
+      <a href="#salida-1" data-exit="1"><i>1</i>La página</a>
+      <a href="#salida-2" data-exit="2"><i>2</i>Cómo está hecha</a>
+      <a href="#salida-3" data-exit="3"><i>3</i>Movimiento</a>
+      <a href="#salida-4" data-exit="4"><i>4</i>Responsive</a>
+      <a href="#salida-5" data-exit="5"><i>5</i>QR</a>
+      <a href="#salida-6" data-exit="6"><i>6</i>Publicación</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="truss" aria-hidden="true"></div>
+      <div class="hero-hang">
+        <div class="hangers" aria-hidden="true"><span></span><span></span></div>
+        <div class="sign sign--hero" data-lit>
+          <div class="exit-tab">Salida <b>19 nov</b></div>
+          <div class="hero-grid">
+            <svg class="hero-shield" role="img" aria-label="Escudo de ruta VI de Leonida"><use href="#shield"/></svg>
+            <h1 id="hero-title" class="hero-dest">
+              <span class="hero-city">Vice City</span>
+              <span class="hero-sub">Lanzamiento de GTA VI</span>
+            </h1>
+            <p class="hero-dist" aria-live="off">
+              <span class="hero-days" data-cd="days">--</span>
+              <span class="hero-unit" data-cd="unit">días</span>
+              <span class="hero-clock" data-cd="clock">--:--:--</span>
+            </p>
+          </div>
+          <div class="exit-only">
+            <a class="band-link" href="#salida-5">
+              <svg class="ico" aria-hidden="true"><use href="#i-down"/></svg>
+              Escanea y comparte
+            </a>
+            <a class="band-link" href="#salida-2">
+              <svg class="ico" aria-hidden="true"><use href="#i-exit"/></svg>
+              Cómo está hecha
+            </a>
+          </div>
+        </div>
+        <p class="plaque">Una página fan que se explica a sí misma: este recorrido cuenta cómo está construida, cómo se mueve y cómo llegó a tu pantalla.</p>
+      </div>
+
+      <div class="road" aria-hidden="true">
+        <div class="horizon">
+          <svg class="skyline" viewBox="0 0 1200 120" preserveAspectRatio="xMidYMax slice">
+            <path d="M0 120V92h40V70h22v22h18V58h30v34h16V40h12V22h8v18h12v52h26V76h34v16h20V48h40v44h18V64h22V30h14V12h6v18h14v62h28V80h30V56h24v36h26V70h18v22h36V44h28v48h16V26h10V8h6v18h10v66h30V62h26v30h22V78h40v14h18V50h32v42h20V68h26v24h30V36h18v56h24V74h28v18h34V60h22v32h26V46h36v46h20V82h40v38Z" fill="#050606"/>
+            <g fill="#e9b45a" opacity=".55">
+              <rect x="122" y="48" width="3" height="3"/><rect x="128" y="60" width="3" height="3"/><rect x="290" y="40" width="3" height="3"/><rect x="296" y="52" width="3" height="3"/><rect x="290" y="70" width="3" height="3"/><rect x="566" y="34" width="3" height="3"/><rect x="572" y="50" width="3" height="3"/><rect x="566" y="66" width="3" height="3"/><rect x="760" y="44" width="3" height="3"/><rect x="900" y="50" width="3" height="3"/><rect x="906" y="62" width="3" height="3"/><rect x="1040" y="56" width="3" height="3"/><rect x="430" y="56" width="3" height="3"/><rect x="190" y="56" width="3" height="3"/>
+            </g>
+          </svg>
+        </div>
+        <div class="road-plane">
+          <span class="edge edge--left"></span>
+          <span class="lane lane--a"></span>
+          <span class="lane lane--b"></span>
+          <span class="edge edge--right"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="exit approach" id="salida-1" aria-labelledby="t1">
+      <div class="sign" data-lit>
+        <div class="exit-tab">Salida <b>1</b></div>
+        <div class="sign-cols">
+          <div class="sign-text">
+            <h2 id="t1">Un viaje hacia el 19 de noviembre</h2>
+            <p>Esta es una página hecha por fans para contar los días que faltan para Grand Theft Auto VI. Pero su tema real es ella misma: cada cartel de esta autopista explica una parte de cómo fue diseñada, programada y publicada.</p>
+            <p>Rockstar Games anunció el lanzamiento para el 19 de noviembre de 2026 en PlayStation 5 y Xbox Series X|S. La historia ocurre en el estado de Leonida, con Vice City como ciudad principal, y sigue a Lucia y Jason.</p>
+          </div>
+          <dl class="distances" aria-label="Datos del lanzamiento">
+            <div><dt>Vice City</dt><dd><span data-cd="days">--</span> días</dd></div>
+            <div><dt>PlayStation 5</dt><dd>19.11.26</dd></div>
+            <div><dt>Xbox Series X|S</dt><dd>19.11.26</dd></div>
+            <div><dt>PC</dt><dd class="dim">Sin anunciar</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="exit approach" id="salida-2" aria-labelledby="t2">
+      <div class="sign sign--blue" data-lit>
+        <div class="exit-tab">Salida <b>2</b></div>
+        <h2 id="t2">Tres archivos, cero frameworks</h2>
+        <p class="lede">Sin React, sin compiladores, sin paso de build. El navegador lee estos archivos tal cual, así que lo que ves es exactamente lo que está escrito.</p>
+        <ul class="services">
+          <li class="service" data-lit>
+            <span class="service-name">HTML</span>
+            <code>index.html</code>
+            <p>La estructura. Cada sección es un cartel con su número de salida, y el menú de arriba es el pórtico que los sostiene.</p>
+            <span class="service-size"><span data-size="index.html">…</span></span>
+          </li>
+          <li class="service" data-lit>
+            <span class="service-name">CSS</span>
+            <code>style.css</code>
+            <p>Los colores de la señalización vial, los bordes reflectivos, la carretera en 3D y todas las animaciones.</p>
+            <span class="service-size"><span data-size="style.css">…</span></span>
+          </li>
+          <li class="service" data-lit>
+            <span class="service-name">JS</span>
+            <code>script.js</code>
+            <p>El faro que sigue tu cursor, la cuenta regresiva, el poste de millas y el dibujo del código QR.</p>
+            <span class="service-size"><span data-size="script.js">…</span></span>
+          </li>
+        </ul>
+        <p class="note">La tipografía es Overpass, una fuente libre basada en Highway Gothic, la letra de los carteles de autopista de Estados Unidos. La única librería es qrcode-generator (licencia MIT), guardada en <code>/vendor</code>, que calcula los módulos del QR.</p>
+      </div>
+    </section>
+
+    <section class="exit exit--pavement approach" id="salida-3" aria-labelledby="t3">
+      <div class="pavement">
+        <div class="exit-tab exit-tab--road">Salida <b>3</b></div>
+        <h2 id="t3" class="painted">Así se mueve</h2>
+        <ol class="markers">
+          <li class="marker" tabindex="0">
+            <h3>El faro</h3>
+            <p>Tu cursor, o tu dedo, es un faro: donde apunta, el material reflectivo de los carteles se ilumina. En el celular, si no tocas la pantalla, pasa un auto cada pocos segundos.</p>
+          </li>
+          <li class="marker" tabindex="0">
+            <h3>Carteles que se acercan</h3>
+            <p>Al bajar, cada cartel llega desde la distancia con una animación ligada al scroll (<code>animation-timeline: view()</code>), sin librerías.</p>
+          </li>
+          <li class="marker" tabindex="0">
+            <h3>Carriles</h3>
+            <p>Las líneas de la carretera avanzan siempre, y más rápido cuanto más rápido haces scroll.</p>
+          </li>
+          <li class="marker" tabindex="0">
+            <h3>Hovers</h3>
+            <p>Al pasar el mouse los carteles se elevan, los botones reciben un destello reflectivo y el QR se escanea con una línea de luz.</p>
+          </li>
+        </ol>
+        <div class="calm">
+          <p>¿Prefieres menos movimiento? Apágalo aquí. La página también respeta la opción <em>reducir movimiento</em> de tu sistema.</p>
+          <button class="switch" type="button" id="calm" aria-pressed="false">
+            <span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span>
+            <span>Modo calma: <b data-calm-label>apagado</b></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="exit approach" id="salida-4" aria-labelledby="t4">
+      <div class="sign" data-lit>
+        <div class="exit-tab">Salida <b>4</b></div>
+        <h2 id="t4">Un carril para cada pantalla</h2>
+        <p class="lede">El diseño empieza en el celular, porque casi todos llegan escaneando el QR. Desde 720&nbsp;px los carteles ganan columnas, y desde 1100&nbsp;px el pórtico de arriba muestra todas las salidas.</p>
+        <ul class="lanes-list">
+          <li class="lane-sign" data-bp="0"><b>Celular</b><span>hasta 719 px</span><em>Estás aquí</em></li>
+          <li class="lane-sign" data-bp="720"><b>Tablet</b><span>720 a 1099 px</span><em>Estás aquí</em></li>
+          <li class="lane-sign" data-bp="1100"><b>Escritorio</b><span>1100 px o más</span><em>Estás aquí</em></li>
+        </ul>
+        <p class="readout">Tu pantalla ahora <b data-viewport>–</b></p>
+      </div>
+    </section>
+
+    <section class="exit approach" id="salida-5" aria-labelledby="t5">
+      <div class="sign sign--qr" data-lit>
+        <div class="exit-tab">Salida <b>5</b></div>
+        <div class="qr-grid">
+          <div>
+            <h2 id="t5">Comparte el viaje</h2>
+            <p class="lede">Apunta la cámara de otro celular a este código y la página se abre ahí. El QR se dibuja en tu navegador a partir de la dirección pública.</p>
+            <p class="qr-url"><span data-qr-source>Dirección</span> <a data-qr-link href="#">…</a></p>
+            <div class="actions">
+              <button class="btn" type="button" data-copy-url>
+                <svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>
+                <span>Copiar enlace</span>
+              </button>
+              <button class="btn btn--ghost" type="button" data-share>
+                <svg class="ico" aria-hidden="true"><use href="#i-share"/></svg>
+                <span>Compartir</span>
+              </button>
+            </div>
+            <p class="status" role="status" data-status></p>
+          </div>
+          <figure class="qr">
+            <div class="qr-frame" data-qr role="img" aria-label="Código QR de esta página"></div>
+            <figcaption>Escanea con la cámara</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="exit approach" id="salida-6" aria-labelledby="t6">
+      <div class="sign sign--brown" data-lit>
+        <div class="exit-tab">Salida <b>6</b></div>
+        <h2 id="t6">Del escritorio a GitHub Pages</h2>
+        <ol class="route">
+          <li>
+            <h3>Servidor local</h3>
+            <p>Doble clic en <code>iniciar-servidor.bat</code>. Arranca Python en el puerto 8000 y abre el navegador con la IP de tu red, así el QR funciona en cualquier celular conectado al mismo Wi-Fi.</p>
+          </li>
+          <li>
+            <h3>Repositorio</h3>
+            <p>Crea un repositorio vacío en github.com y ejecuta <code>publicar-github.bat</code>: pide tu usuario y el nombre del repo, los conecta y sube los archivos.</p>
+          </li>
+          <li>
+            <h3>GitHub Pages</h3>
+            <p>En el repositorio entra a Settings, luego Pages, y elige la rama <code>main</code> con la carpeta raíz. En un minuto la página vive en <code>tu-usuario.github.io/nombre-del-repo</code> y el QR apunta ahí solo.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="end approach" aria-labelledby="t-end">
+      <div class="end-sign" data-lit>
+        <h2 id="t-end"><span>Fin de la</span> autopista</h2>
+        <p>Nos vemos en Vice City el 19 de noviembre.</p>
+        <a class="btn btn--dark" href="#top">
+          <svg class="ico" aria-hidden="true"><use href="#i-up"/></svg>
+          Volver al inicio
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Proyecto de fans, sin fines comerciales. No está afiliado con Rockstar Games ni con Take-Two Interactive. Grand Theft Auto es una marca de Take-Two Interactive Software.</p>
+  </footer>
+
+  <div class="milepost" aria-hidden="true">
+    <span>Milla</span>
+    <b data-mile>0.0</b>
+  </div>
+
+  <script src="vendor/qrcode.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
