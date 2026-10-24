@@ -1,6 +1,6 @@
 @echo off
 chcp 65001 >nul
-title Leonida Tpk - publicar en GitHub Pages
+title Vice City de noche - publicar en GitHub Pages
 cd /d "%~dp0"
 
 where git >nul 2>nul || (
@@ -37,7 +37,7 @@ git config user.name >nul 2>nul || git config user.name "%GHUSER%"
 git config user.email >nul 2>nul || git config user.email "%GHUSER%@users.noreply.github.com"
 
 git add -A
-git commit -m "Publicar Leonida Tpk en GitHub Pages" >nul 2>nul
+git commit -m "Publicar Vice City de noche en GitHub Pages" >nul 2>nul
 git branch -M main
 git remote remove origin >nul 2>nul
 git remote add origin "https://github.com/%GHUSER%/%REPO%.git"

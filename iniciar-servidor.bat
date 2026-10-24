@@ -1,6 +1,6 @@
 @echo off
 chcp 65001 >nul
-title Leonida Tpk - servidor local
+title Vice City de noche - servidor local
 cd /d "%~dp0"
 
 set "PORT=%~1"
@@ -24,7 +24,7 @@ if "%LANIP%"=="" set "LANIP=localhost"
 
 echo.
 echo  ==============================================
-echo    LEONIDA TPK  -  servidor local encendido
+echo    VICE CITY DE NOCHE - servidor encendido
 echo  ==============================================
 echo.
 echo    En esta PC:      http://localhost:%PORT%/
@@ -38,5 +38,5 @@ echo    Cierra esta ventana o pulsa Ctrl+C para apagarlo.
 echo.
 
 start "" /b powershell -NoProfile -Command "Start-Sleep -Milliseconds 900; Start-Process 'http://%LANIP%:%PORT%/'"
-%PY% -m http.server %PORT% --bind 0.0.0.0
+%PY% servidor.py %PORT%
 pause

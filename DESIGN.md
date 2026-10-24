@@ -1,49 +1,51 @@
-# Design: Leonida Tpk
+# Design: Vice City de noche
 
-Señalización vial nocturna de autopista. La página es un viaje hacia el lanzamiento de GTA VI; cada sección es un cartel de salida.
+Vice City después de la puesta de sol, como una película que se recorre con el scroll. Inspirado por el ambiente de la web oficial de GTA VI (pedido explícito del usuario) sin usar su logo, arte ni personajes.
 
 ## Color
 
 | Token | Valor | Uso |
 |---|---|---|
-| `--asphalt` | `#0c0d0c` | Fondo de página (noche) |
-| `--asphalt-2` / `-3` | `#151715` / `#1d201d` | Pavimento, hover sobre pavimento |
-| `--steel` / `--steel-hi` | `#262a28` / `#4b524d` | Pórtico, celosía, colgantes |
-| `--green` | `#00704a` | Cartel guía (color dominante) |
-| `--green-deep` / `--green-lit` | `#00583a` / `#0b7a50` | Paneles internos / hover |
-| `--blue` / `--blue-lit` | `#1a4ea0` / `#2a60b6` | Cartel de servicios (stack) |
-| `--brown` / `--brown-lit` | `#5b3a1e` / `#6d4828` | Cartel turístico (publicación) |
-| `--yellow` | `#f6c90e` | Banda EXIT ONLY = acción principal, foco, selección |
-| `--white` | `#f4f6f2` | Letras y bordes reflectivos |
-| `--mist`, `--mist-blue`, `--mist-brown` | tintes del color de su cartel | Texto secundario sobre cada cartel |
-| `--amber` | `#ffd98a` | Faro, reflectores |
+| `--night` | `#07060c` | Fondo: noche índigo casi negra |
+| `--night-2` / `--night-3` | `#0e0b18` / `#171226` | Superficies, pistas del interruptor |
+| `--ink` | `#f7eff6` | Texto principal |
+| `--muted` / `--faint` | `#bcaecb` / `#8d7fa0` | Texto secundario / leyendas y pie |
+| `--line` | `rgba(247,239,246,.14)` | Filetes divisorios |
+| `--pink` → `--coral` → `--amber` | `#ff4d9d` → `#ff7657` → `#ffc15e` | `--sunset`: sólo titulares destacados, números del reloj, acción principal, barra de progreso |
+| `--cyan` | `#57e1f0` | Acento raro: notas "Cómo se hizo" y datos en vivo |
+| `--on-grad` | `#1d0a14` | Texto sobre el degradado |
 
-Estrategia: comprometida. El verde ocupa regiones completas; amarillo sólo para la acción principal y estados.
+Estrategia: la fotografía nocturna es el material; el degradado atardecer se reserva para lo que debe brillar.
 
 ## Tipografía
 
-- Overpass (heredera libre de Highway Gothic) 400/600/800/900 para todo el texto.
-- Overpass Mono sólo para medidas: reloj, millas, tamaños de archivo, viewport, código.
-- Display máx. 6rem; títulos de cartel `clamp(2rem, …, 4rem)`; mayúsculas con tracking .04–.08em en rótulos.
+- **Big Shoulders Display** 800/900, mayúsculas, interlineado .88: titulares (`.display`, máx. 6rem), nombres de lugares, menú, reloj.
+- **Hanken Grotesk** 400–700: lectura, botones, etiquetas.
+- Etiquetas pequeñas en mayúsculas con tracking .12–.2em.
 
 ## Componentes
 
-- **Cartel** (`.sign`): radio 18px, borde blanco interior 3px a 8px del canto, pestaña de salida (`.exit-tab`) pegada arriba, sombra con desplazamiento. Variantes: verde, `--blue`, `--brown`, cierre blanco/negro (`.end-sign`).
-- **Banda EXIT ONLY** (`.exit-only`, `.band-link`): amarilla, texto negro 900; hover invierte a negro/amarillo con destello.
-- **Botón** (`.btn`): blanco sobre cartel, 50px mín.; variantes `--ghost`, `--dark`, estado `.is-done` amarillo.
-- **Pórtico** (`.gantry`): barra de acero fija; salidas como mini-carteles con número en caja blanca (amarilla si activa).
-- **Poste de millas** (`.milepost`): progreso de scroll 0.0–6.0; abajo a la derecha en escritorio, dentro del pórtico en móvil.
-- **Reflectores** (`.marker`): ojos de gato que se encienden con hover/foco sobre pavimento.
-- **Interruptor** (`.switch`): modo calma, `aria-pressed`.
+- **Intro VI** (`.intro`): las letras VI recortan la noche y muestran el skyline; el scroll escala el SVG entero hacia el centro de la "I" (`--s`, `--ox/--oy`) hasta revelar la foto y el titular. Sin JS o con movimiento reducido, se muestra el estado final.
+- **Nav** fija transparente que gana fondo con desenfoque al bajar; píldora con días restantes; botón Menú (líneas que se cruzan).
+- **Menú** a pantalla completa: se abre en círculo desde el botón, enlaces enormes que suben escalonados, degradado que rellena el texto al pasar, foto de la sección de fondo.
+- **Botones**: `.btn--grad` (degradado, sombra rosa desplazada, destello), `.btn--line` (contorno que se enciende en rosa).
+- **Tarjetas de lugar** (`.place`): foto 3:4, título condensado; en escritorio luz que sigue al cursor, zoom y descripción que sube; en móvil carrusel con scroll-snap.
+- **Nota "Cómo se hizo"** (`.bts`): filete superior, etiqueta cian con punto.
+- **Reloj** (`.clock`): cuatro números con degradado que ruedan al cambiar.
+- **Especificaciones** (`.specs`): filas con filete, título que se desplaza y toma ámbar al pasar.
+- **QR** en marco blanco con resplandor; al pasar, una línea de luz lo escanea.
 
 ## Movimiento
 
-- Easing único `cubic-bezier(.16, 1, .3, 1)`.
-- Firma: el faro (puntero/toque, o un auto que pasa cada 6 s sin entrada) revela la lámina reflectiva prismática bajo `--lx/--ly`.
-- Carteles se acercan con `animation-timeline: view()` desde estado visible.
-- Carriles avanzan con velocidad ligada al scroll.
-- `prefers-reduced-motion` y Modo calma desactivan todo movimiento sin ocultar contenido.
+- Easing `cubic-bezier(.16,1,.3,1)`; menú `cubic-bezier(.76,0,.24,1)`.
+- Ligado al scroll (`animation-timeline: view()`): textos suben desde desenfoque, fotos se revelan con `clip-path` y zoom, parallax en Lucia & Jason.
+- Grano de película animado sobre toda la página.
+- `prefers-reduced-motion` y el Modo calma apagan todo el movimiento sin ocultar contenido.
 
 ## Responsive
 
-Mobile-first. 720px: columnas en carteles y banda en dos. 1100px: pórtico con todas las salidas. 480px: botón de salidas sólo ícono.
+Mobile-first (la entrada principal es el QR). 720px: tarjetas en cuadrícula de 3. 900px: columnas en Vice City, Cómo se hizo y Compartir; foto de Lucia & Jason a la derecha. Portada móvil con recorte vertical propio (`hero-mobile.webp`).
+
+## Imágenes
+
+Seis fotos originales generadas con Higgsfield (nano_banana_2), convertidas a WebP (~895 KB en total). Cada archivo lleva su prompt en `img/*.webp.json`. Las personas aparecen sólo de espaldas.

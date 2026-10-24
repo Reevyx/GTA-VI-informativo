@@ -1,4 +1,4 @@
-// Leonida Tpk: faro, cuenta regresiva, poste de millas y QR.
+// Vice City de noche: intro VI, menú, cuenta regresiva, datos en vivo y QR.
 
 // Dirección pública en GitHub Pages. publicar-github.bat la reemplaza sola.
 const PUBLIC_URL = "https://TU-USUARIO.github.io/gta6-leonida/";
@@ -6,7 +6,6 @@ const LAUNCH = new Date(2026, 10, 19, 0, 0, 0); // 19 nov 2026, hora local
 
 const root = document.documentElement;
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-const canHover = matchMedia("(hover: hover)");
 
 const store = {
   get(key) { try { return localStorage.getItem(key); } catch { return null; } },
@@ -14,103 +13,152 @@ const store = {
 };
 
 const isCalm = () => reducedMotion.matches || root.classList.contains("calm-mode");
+const clamp01 = (n) => Math.min(1, Math.max(0, n));
+const pad = (n) => String(n).padStart(2, "0");
 
 /* ---------- Cuenta regresiva ---------- */
 
-function tickCountdown() {
-  const ms = LAUNCH - Date.now();
-  const days = document.querySelectorAll('[data-cd="days"]');
-  const unit = document.querySelector('[data-cd="unit"]');
-  const clock = document.querySelector('[data-cd="clock"]');
+const cd = {
+  days: document.querySelectorAll('[data-cd="days"]'),
+  clock: document.querySelectorAll('[data-cd="clock"]'),
+  d: document.querySelector('[data-cd="d"]'),
+  h: document.querySelector('[data-cd="h"]'),
+  m: document.querySelector('[data-cd="m"]'),
+  s: document.querySelector('[data-cd="s"]'),
+};
 
-  if (ms <= 0) {
-    days.forEach((el) => { el.textContent = "Ya"; });
-    unit.textContent = "disponible";
-    clock.textContent = "19.11.2026";
-    return;
-  }
-  const total = Math.floor(ms / 1000);
+function setNum(el, value) {
+  if (el.textContent === value) return;
+  el.textContent = value;
+  if (isCalm()) return;
+  el.classList.remove("tick");
+  void el.offsetWidth; // reinicia la animación
+  el.classList.add("tick");
+}
+
+function tickCountdown() {
+  const total = Math.max(0, Math.floor((LAUNCH - Date.now()) / 1000));
   const d = Math.floor(total / 86400);
   const h = Math.floor((total % 86400) / 3600);
   const m = Math.floor((total % 3600) / 60);
   const s = total % 60;
-  const pad = (n) => String(n).padStart(2, "0");
 
-  days.forEach((el) => { el.textContent = d; });
-  unit.textContent = d === 1 ? "día" : "días";
-  clock.textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
+  cd.days.forEach((el) => { el.textContent = d; });
+  cd.clock.forEach((el) => { el.textContent = `${pad(h)}:${pad(m)}:${pad(s)}`; });
+  setNum(cd.d, pad(d));
+  setNum(cd.h, pad(h));
+  setNum(cd.m, pad(m));
+  setNum(cd.s, pad(s));
 }
 tickCountdown();
 setInterval(tickCountdown, 1000);
 
-/* ---------- Faro ---------- */
+/* ---------- Intro: entrar por las letras VI ---------- */
 
-const lit = [...document.querySelectorAll("[data-lit]")];
-const visible = new Set();
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((e) => (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)));
-}, { rootMargin: "100px" });
-lit.forEach((el) => io.observe(el));
+const intro = document.querySelector(".intro");
+const stage = document.querySelector(".intro-stage");
+const maskSvg = document.querySelector(".intro-mask");
+const letterText = maskSvg.querySelector(".mask-letters text");
 
-const beam = { x: -9999, y: -9999, lastInput: 0, frame: 0 };
-
-function paintBeam() {
-  beam.frame = 0;
-  root.style.setProperty("--bx", `${beam.x}px`);
-  root.style.setProperty("--by", `${beam.y}px`);
-  visible.forEach((el) => {
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--lx", `${beam.x - r.left}px`);
-    el.style.setProperty("--ly", `${beam.y - r.top}px`);
-  });
+// El zoom apunta al centro del trazo de la "I" para que al final se vea la foto, no la noche.
+function aimAtI() {
+  try {
+    const box = letterText.getExtentOfChar(1);
+    root.style.setProperty("--ox", `${box.x + box.width / 2}px`);
+    root.style.setProperty("--oy", `${box.y + box.height * 0.55}px`);
+  } catch { /* fuente aún sin cargar */ }
 }
 
-function aimBeam(x, y) {
-  beam.x = x;
-  beam.y = y;
-  if (!beam.frame) beam.frame = requestAnimationFrame(paintBeam);
+function paintIntro() {
+  if (!root.classList.contains("js-intro")) return;
+  const range = intro.offsetHeight - stage.offsetHeight;
+  const p = clamp01(-intro.getBoundingClientRect().top / range);
+  const zoom = clamp01(p / 0.72);
+  const style = stage.style;
+
+  style.setProperty("--s", Math.pow(70, zoom * zoom).toFixed(3));
+  style.setProperty("--img-s", (1.3 - 0.3 * zoom).toFixed(3));
+  style.setProperty("--outline", clamp01(1 - zoom * 3).toFixed(3));
+  style.setProperty("--cue", clamp01(1 - p * 6).toFixed(3));
+  style.setProperty("--night-o", clamp01(1 - (zoom - 0.82) / 0.18).toFixed(3));
+  const copy = clamp01((p - 0.7) / 0.22);
+  style.setProperty("--copy", copy.toFixed(3));
+  style.setProperty("--copy-vis", copy > 0 ? "visible" : "hidden");
 }
 
-addEventListener("pointermove", (e) => {
-  beam.lastInput = performance.now();
-  aimBeam(e.clientX, e.clientY);
-}, { passive: true });
-addEventListener("pointerdown", (e) => {
-  beam.lastInput = performance.now();
-  aimBeam(e.clientX, e.clientY);
-}, { passive: true });
-addEventListener("scroll", () => { if (!beam.frame) beam.frame = requestAnimationFrame(paintBeam); }, { passive: true });
-
-/* ---------- Carriles + auto que pasa ---------- */
-
-const road = document.querySelector(".road");
-const roadState = { off: 0, lastY: scrollY, speed: 0, last: performance.now() };
-
-function drive(now) {
-  const dt = Math.min(64, now - roadState.last);
-  roadState.last = now;
-
-  if (!isCalm()) {
-    // Las líneas aceleran con la velocidad del scroll.
-    const dy = Math.abs(scrollY - roadState.lastY);
-    roadState.lastY = scrollY;
-    roadState.speed += (dy * 0.9 - roadState.speed) * 0.12;
-    roadState.off = (roadState.off + (0.09 + roadState.speed * 0.02) * dt) % 40;
-    road.style.setProperty("--lane-off", `${roadState.off.toFixed(2)}px`);
-
-    // Sin cursor (celular o mouse quieto): pasa un auto barriendo los carteles.
-    const idle = now - beam.lastInput > (canHover.matches ? 4000 : 1800);
-    if (idle) {
-      const t = now / 1000;
-      const w = innerWidth;
-      const h = innerHeight;
-      const sweep = (t % 6) / 6; // un auto cada 6 s
-      aimBeam(-0.3 * w + sweep * 1.6 * w, h * (0.38 + 0.12 * Math.sin(t * 0.9)));
-    }
+function setupIntro() {
+  const on = !isCalm();
+  root.classList.toggle("js-intro", on);
+  if (!on) {
+    ["--s", "--img-s", "--outline", "--cue", "--night-o", "--copy", "--copy-vis"].forEach((v) => stage.style.removeProperty(v));
+    return;
   }
-  requestAnimationFrame(drive);
+  aimAtI();
+  paintIntro();
 }
-requestAnimationFrame(drive);
+
+/* ---------- Scroll: barra de progreso, nav y parallax ---------- */
+
+const nav = document.querySelector(".nav");
+const bar = document.querySelector(".progress span");
+let frame = 0;
+
+function onScroll() {
+  frame = 0;
+  const max = root.scrollHeight - innerHeight;
+  bar.style.setProperty("--p", max > 0 ? (scrollY / max).toFixed(4) : 0);
+  nav.classList.toggle("is-scrolled", scrollY > 40);
+  paintIntro();
+}
+addEventListener("scroll", () => { if (!frame) frame = requestAnimationFrame(onScroll); }, { passive: true });
+addEventListener("resize", () => { aimAtI(); onScroll(); });
+document.fonts?.ready.then(() => { aimAtI(); paintIntro(); });
+
+/* ---------- Menú ---------- */
+
+const menu = document.getElementById("menu");
+const menuBtn = document.querySelector(".menu-btn");
+const menuLinks = [...menu.querySelectorAll("a")];
+const menuImgs = [...menu.querySelectorAll(".menu-bg img")];
+menuLinks.forEach((a, i) => a.style.setProperty("--i", i));
+
+function previewMenu(key) {
+  menuImgs.forEach((img) => img.classList.toggle("is-on", img.dataset.for === key));
+}
+
+function setMenu(open) {
+  menu.classList.toggle("is-open", open);
+  menuBtn.setAttribute("aria-expanded", String(open));
+  menuBtn.querySelector(".menu-label").textContent = open ? "Cerrar" : "Menú";
+  document.body.style.overflow = open ? "hidden" : "";
+  document.querySelector("main").inert = open;
+  if (open) {
+    previewMenu(menuLinks[0].dataset.img);
+    setTimeout(() => menuLinks[0].focus({ preventScroll: true }), 350);
+  }
+}
+menuBtn.addEventListener("click", () => setMenu(menuBtn.getAttribute("aria-expanded") !== "true"));
+menuLinks.forEach((a) => {
+  a.addEventListener("click", () => setMenu(false));
+  a.addEventListener("pointerenter", () => previewMenu(a.dataset.img));
+  a.addEventListener("focus", () => previewMenu(a.dataset.img));
+});
+addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && menu.classList.contains("is-open")) {
+    setMenu(false);
+    menuBtn.focus();
+  }
+});
+
+/* ---------- Luz que sigue al cursor en los lugares ---------- */
+
+document.querySelectorAll("[data-spot]").forEach((card) => {
+  card.addEventListener("pointermove", (e) => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    card.style.setProperty("--my", `${e.clientY - r.top}px`);
+  });
+});
 
 /* ---------- Modo calma ---------- */
 
@@ -121,7 +169,7 @@ function setCalm(on) {
   root.classList.toggle("calm-mode", on);
   calmBtn.setAttribute("aria-pressed", String(on));
   calmLabel.textContent = on ? "encendido" : "apagado";
-  if (on) aimBeam(innerWidth * 0.5, innerHeight * 0.3);
+  setupIntro();
 }
 setCalm(store.get("calm") === "1" || reducedMotion.matches);
 calmBtn.addEventListener("click", () => {
@@ -129,70 +177,40 @@ calmBtn.addEventListener("click", () => {
   setCalm(on);
   store.set("calm", on ? "1" : "0");
 });
+onScroll();
 
-/* ---------- Poste de millas ---------- */
-
-const mile = document.querySelector("[data-mile]");
-function updateMile() {
-  const max = document.documentElement.scrollHeight - innerHeight;
-  const p = max > 0 ? Math.min(1, scrollY / max) : 0;
-  mile.textContent = (p * 6).toFixed(1);
-}
-addEventListener("scroll", updateMile, { passive: true });
-addEventListener("resize", updateMile);
-updateMile();
-
-/* ---------- Navegación ---------- */
-
-const gantry = document.querySelector(".gantry");
-const toggle = document.querySelector(".gantry-toggle");
-const links = [...document.querySelectorAll(".exits a")];
-
-function setMenu(open) {
-  gantry.classList.toggle("is-open", open);
-  toggle.setAttribute("aria-expanded", String(open));
-  toggle.querySelector("use").setAttribute("href", open ? "#i-close" : "#i-menu");
-}
-toggle.addEventListener("click", () => setMenu(toggle.getAttribute("aria-expanded") !== "true"));
-links.forEach((a) => a.addEventListener("click", () => setMenu(false)));
-addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
-
-const sections = links.map((a) => document.querySelector(a.getAttribute("href")));
-const navIO = new IntersectionObserver((entries) => {
-  entries.forEach((e) => {
-    if (!e.isIntersecting) return;
-    links.forEach((a) => a.removeAttribute("aria-current"));
-    const active = links[sections.indexOf(e.target)];
-    if (active) active.setAttribute("aria-current", "true");
-  });
-}, { rootMargin: "-45% 0px -50% 0px" });
-sections.forEach((s) => navIO.observe(s));
-
-/* ---------- Pantalla actual ---------- */
+/* ---------- Datos en vivo ---------- */
 
 const viewportEl = document.querySelector("[data-viewport]");
-const laneSigns = [...document.querySelectorAll(".lane-sign")];
-function updateViewport() {
-  const w = innerWidth;
-  viewportEl.textContent = `${w} × ${innerHeight} px`;
-  const bp = w >= 1100 ? "1100" : w >= 720 ? "720" : "0";
-  laneSigns.forEach((el) => el.classList.toggle("is-here", el.dataset.bp === bp));
-}
+function updateViewport() { viewportEl.textContent = `${innerWidth} × ${innerHeight} px`; }
 addEventListener("resize", updateViewport);
 updateViewport();
 
-/* ---------- Tamaño real de los archivos ---------- */
+async function sizeOf(path) {
+  const res = await fetch(path, { cache: "no-store" });
+  if (!res.ok) throw new Error(res.status);
+  return (await res.blob()).size;
+}
+const kb = (bytes) => `${(bytes / 1024).toFixed(1)} KB`;
 
-document.querySelectorAll("[data-size]").forEach(async (el) => {
+(async () => {
+  const sizesEl = document.querySelector("[data-sizes]");
+  const imgsEl = document.querySelector("[data-imgs]");
   try {
-    const res = await fetch(el.dataset.size, { cache: "no-store" });
-    if (!res.ok) throw new Error(res.status);
-    const bytes = (await res.blob()).size;
-    el.textContent = `${(bytes / 1024).toFixed(1)} KB · leído ahora`;
+    const files = ["index.html", "style.css", "script.js"];
+    const sizes = await Promise.all(files.map(sizeOf));
+    sizesEl.textContent = files.map((f, i) => `${f} ${kb(sizes[i])}`).join(" · ");
   } catch {
-    el.textContent = "Ábrela desde el servidor para medirlo";
+    sizesEl.textContent = "Ábrela desde el servidor para medir los archivos.";
   }
-});
+  try {
+    const imgs = ["hero-2400", "hero-1400", "hero-mobile", "ocean-drive", "keys", "grassrivers", "beach", "duo"].map((n) => `img/${n}.webp`);
+    const total = (await Promise.all(imgs.map(sizeOf))).reduce((a, b) => a + b, 0);
+    imgsEl.textContent = `${imgs.length} archivos WebP, ${kb(total)} en total`;
+  } catch {
+    imgsEl.textContent = "Ábrela desde el servidor para medir las imágenes.";
+  }
+})();
 
 /* ---------- QR ---------- */
 
@@ -229,7 +247,7 @@ function drawQr() {
   for (let r = 0; r < n; r++) {
     for (let c = 0; c < n; c++) if (qr.isDark(r, c)) d += `M${c} ${r}h1v1h-1z`;
   }
-  qrBox.innerHTML = `<svg viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges" aria-hidden="true"><path d="${d}" fill="#111210"/></svg>`;
+  qrBox.innerHTML = `<svg viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges" aria-hidden="true"><path d="${d}" fill="#07060c"/></svg>`;
 }
 drawQr();
 
@@ -264,7 +282,7 @@ copyBtn.addEventListener("click", async () => {
 if (navigator.share) {
   shareBtn.addEventListener("click", async () => {
     try {
-      await navigator.share({ title: document.title, text: "Rumbo a Vice City: una página fan de GTA VI", url: shareUrl });
+      await navigator.share({ title: document.title, text: "Vice City de noche: una página fan de GTA VI", url: shareUrl });
       status.textContent = "";
     } catch (err) {
       if (err.name !== "AbortError") status.textContent = "No se pudo abrir el menú de compartir.";

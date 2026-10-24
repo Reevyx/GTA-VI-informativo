@@ -3,276 +3,292 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Rumbo a Vice City · GTA VI</title>
-  <meta name="description" content="Página fan del lanzamiento de GTA VI que se explica a sí misma: cómo está hecha, cómo se mueve y cómo llegó a tu pantalla.">
-  <meta name="theme-color" content="#0c0d0c">
-  <meta property="og:title" content="Rumbo a Vice City · GTA VI">
-  <meta property="og:description" content="Una autopista hacia el 19 de noviembre de 2026. Página fan, no oficial.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M8 14Q29 4 50 14Q71 4 92 14V44C92 70 74 86 50 96 26 86 8 70 8 44Z' fill='%23123f8c' stroke='%23fff' stroke-width='5'/%3E%3Cpath d='M8 14Q29 4 50 14Q71 4 92 14V34H8Z' fill='%23c4202b'/%3E%3Ctext x='50' y='76' font-family='Arial' font-weight='700' font-size='38' fill='%23fff' text-anchor='middle'%3EVI%3C/text%3E%3C/svg%3E">
+  <title>Vice City de noche · GTA VI</title>
+  <meta name="description" content="Página fan del lanzamiento de GTA VI: Vice City de noche, el estado de Leonida, la cuenta regresiva al 19 de noviembre de 2026 y cómo está hecha esta misma página.">
+  <meta name="theme-color" content="#07060c">
+  <meta property="og:title" content="Vice City de noche · GTA VI">
+  <meta property="og:description" content="Cuenta regresiva al 19 de noviembre de 2026. Página fan, no oficial.">
+  <meta property="og:image" content="img/hero-1400.webp">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%23ff4d9d'/%3E%3Cstop offset='.5' stop-color='%23ff7657'/%3E%3Cstop offset='1' stop-color='%23ffc15e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%2307060c'/%3E%3Ctext x='32' y='47' font-family='Arial Narrow,Arial' font-weight='900' font-size='38' fill='url(%23g)' text-anchor='middle'%3EVI%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@500;700&family=Overpass:ital,wght@0,400;0,600;0,800;0,900;1,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="img/hero-mobile.webp" media="(max-width: 719px)">
+  <link rel="preload" as="image" href="img/hero-2400.webp" media="(min-width: 720px)">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <svg width="0" height="0" class="sr-only" aria-hidden="true" focusable="false">
     <defs>
-      <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v17M5 13l7 7 7-7"/></symbol>
-      <symbol id="i-exit" viewBox="0 0 24 24"><path d="M6 18 18 6M8 6h10v10"/></symbol>
-      <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 21V4M5 11l7-7 7 7"/></symbol>
+      <linearGradient id="sunset" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0" stop-color="#ff4d9d"/>
+        <stop offset=".5" stop-color="#ff7657"/>
+        <stop offset="1" stop-color="#ffc15e"/>
+      </linearGradient>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v16M6 14l6 6 6-6"/></symbol>
+      <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V4M6 10l6-6 6 6"/></symbol>
       <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></symbol>
       <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V3M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></symbol>
       <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
-      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
-      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
-      <symbol id="shield" viewBox="0 0 100 100">
-        <path d="M8 14Q29 4 50 14Q71 4 92 14V44C92 70 74 86 50 96 26 86 8 70 8 44Z" fill="#123f8c"/>
-        <path d="M8 14Q29 4 50 14Q71 4 92 14V33H8Z" fill="#c4202b"/>
-        <path d="M8 14Q29 4 50 14Q71 4 92 14V44C92 70 74 86 50 96 26 86 8 70 8 44Z" fill="none" stroke="#fff" stroke-width="4"/>
-        <path d="M8 33H92" stroke="#fff" stroke-width="3"/>
-        <text x="50" y="27" font-family="Overpass, sans-serif" font-weight="800" font-size="11" letter-spacing="1" fill="#fff" text-anchor="middle">LEONIDA</text>
-        <text x="50" y="77" font-family="Overpass, sans-serif" font-weight="900" font-size="40" fill="#fff" text-anchor="middle">VI</text>
-      </symbol>
     </defs>
   </svg>
 
-  <a class="skip" href="#salida-1">Saltar al contenido</a>
+  <a class="skip" href="#vice-city">Saltar al contenido</a>
+  <div class="progress" aria-hidden="true"><span></span></div>
+  <div class="grain" aria-hidden="true"></div>
 
-  <div class="beam" aria-hidden="true"></div>
-
-  <header class="gantry" id="top">
-    <a class="gantry-brand" href="#top" aria-label="Inicio">
-      <svg class="gantry-shield" aria-hidden="true"><use href="#shield"/></svg>
-      <span>Leonida <b>Tpk</b></span>
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="Inicio">
+      <span class="brand-vi">VI</span>
+      <span class="brand-txt">Vice City <em>de noche</em></span>
     </a>
-    <button class="gantry-toggle" type="button" aria-expanded="false" aria-controls="exits">
-      <svg class="ico" aria-hidden="true"><use href="#i-menu"/></svg>
-      <span>Salidas</span>
+    <p class="nav-count" aria-label="Días para el lanzamiento"><span data-cd="days">--</span> días</p>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">
+      <span class="menu-lines" aria-hidden="true"><i></i><i></i></span>
+      <span class="menu-label">Menú</span>
     </button>
-    <nav class="exits" id="exits" aria-label="Salidas">
-      <a href="#salida-1" data-exit="1"><i>1</i>La página</a>
-      <a href="#salida-2" data-exit="2"><i>2</i>Cómo está hecha</a>
-      <a href="#salida-3" data-exit="3"><i>3</i>Movimiento</a>
-      <a href="#salida-4" data-exit="4"><i>4</i>Responsive</a>
-      <a href="#salida-5" data-exit="5"><i>5</i>QR</a>
-      <a href="#salida-6" data-exit="6"><i>6</i>Publicación</a>
-    </nav>
   </header>
 
-  <main>
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="truss" aria-hidden="true"></div>
-      <div class="hero-hang">
-        <div class="hangers" aria-hidden="true"><span></span><span></span></div>
-        <div class="sign sign--hero" data-lit>
-          <div class="exit-tab">Salida <b>19 nov</b></div>
-          <div class="hero-grid">
-            <svg class="hero-shield" role="img" aria-label="Escudo de ruta VI de Leonida"><use href="#shield"/></svg>
-            <h1 id="hero-title" class="hero-dest">
-              <span class="hero-city">Vice City</span>
-              <span class="hero-sub">Lanzamiento de GTA VI</span>
-            </h1>
-            <p class="hero-dist" aria-live="off">
-              <span class="hero-days" data-cd="days">--</span>
-              <span class="hero-unit" data-cd="unit">días</span>
-              <span class="hero-clock" data-cd="clock">--:--:--</span>
-            </p>
+  <nav class="menu" id="menu" aria-label="Secciones">
+    <div class="menu-bg" aria-hidden="true">
+      <img src="img/ocean-drive.webp" alt="" data-for="vice-city" loading="lazy">
+      <img src="img/keys.webp" alt="" data-for="leonida" loading="lazy">
+      <img src="img/duo.webp" alt="" data-for="protagonistas" loading="lazy">
+      <img src="img/hero-1400.webp" alt="" data-for="cuenta" loading="lazy">
+      <img src="img/grassrivers.webp" alt="" data-for="como" loading="lazy">
+      <img src="img/beach.webp" alt="" data-for="compartir" loading="lazy">
+    </div>
+    <ol class="menu-list">
+      <li><a href="#vice-city" data-img="vice-city"><span>Vice City</span></a></li>
+      <li><a href="#leonida" data-img="leonida"><span>Leonida</span></a></li>
+      <li><a href="#protagonistas" data-img="protagonistas"><span>Lucia &amp; Jason</span></a></li>
+      <li><a href="#cuenta" data-img="cuenta"><span>Cuenta regresiva</span></a></li>
+      <li><a href="#como" data-img="como"><span>Cómo se hizo</span></a></li>
+      <li><a href="#compartir" data-img="compartir"><span>Compartir</span></a></li>
+    </ol>
+    <p class="menu-foot">Página fan · no oficial · 19.11.2026</p>
+  </nav>
+
+  <main id="top">
+    <!-- Intro: el VI recortado deja ver la ciudad; al bajar, entras por las letras -->
+    <section class="intro" aria-labelledby="intro-title">
+      <div class="intro-stage">
+        <picture class="intro-img">
+          <source media="(max-width: 719px)" srcset="img/hero-mobile.webp">
+          <source media="(max-width: 1400px)" srcset="img/hero-1400.webp">
+          <img src="img/hero-2400.webp" alt="Skyline nocturno de una ciudad costera con torres iluminadas en magenta y ámbar reflejadas en la bahía, con palmeras en primer plano." fetchpriority="high">
+        </picture>
+        <div class="intro-shade" aria-hidden="true"></div>
+
+        <svg class="intro-mask" aria-hidden="true" preserveAspectRatio="none">
+          <defs>
+            <mask id="vi-mask" maskUnits="userSpaceOnUse">
+              <rect class="mask-fill" width="100%" height="100%" fill="#fff"/>
+              <g class="mask-letters"><text x="50%" y="50%" text-anchor="middle" dominant-baseline="central" fill="#000">VI</text></g>
+            </mask>
+          </defs>
+          <rect class="mask-night" width="100%" height="100%" fill="#07060c" mask="url(#vi-mask)"/>
+          <g class="mask-letters mask-outline"><text x="50%" y="50%" text-anchor="middle" dominant-baseline="central" fill="none" stroke="url(#sunset)">VI</text></g>
+        </svg>
+
+        <div class="intro-cue" aria-hidden="true">
+          <p class="cue-date">19 · 11 · 2026</p>
+          <p class="cue-scroll">Desliza para entrar <svg class="ico"><use href="#i-down"/></svg></p>
+        </div>
+
+        <div class="intro-copy">
+          <h1 id="intro-title" class="display">
+            <span class="line">Bienvenido</span>
+            <span class="line">a <em class="grad">Vice City</em></span>
+          </h1>
+          <p class="intro-lede">Una página fan para la noche más esperada: GTA VI llega el 19 de noviembre de 2026. Faltan <b data-cd="days">--</b> días y <b data-cd="clock">--:--:--</b>.</p>
+          <div class="actions">
+            <a class="btn btn--grad" href="#leonida">Explorar Leonida <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn--line" href="#compartir">Compartir con QR</a>
           </div>
-          <div class="exit-only">
-            <a class="band-link" href="#salida-5">
-              <svg class="ico" aria-hidden="true"><use href="#i-down"/></svg>
-              Escanea y comparte
-            </a>
-            <a class="band-link" href="#salida-2">
-              <svg class="ico" aria-hidden="true"><use href="#i-exit"/></svg>
-              Cómo está hecha
-            </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vice City -->
+    <section class="city" id="vice-city" aria-labelledby="t-city">
+      <div class="city-text">
+        <h2 id="t-city" class="display reveal">Neón, <em class="grad">humedad</em> y dinero rápido</h2>
+        <p class="reveal">Vice City es el corazón del estado de Leonida, la versión de Rockstar de Miami: hoteles art déco iluminados, autos clásicos en la avenida de la playa y una ciudad que de noche se vuelve otra.</p>
+        <p class="reveal">Esta página intenta capturar justo eso: la ciudad después de que se pone el sol.</p>
+        <aside class="bts reveal">
+          <h3>Cómo se hizo</h3>
+          <p>Las seis fotos de la página son originales, generadas con IA para este proyecto. Ninguna pertenece a Rockstar. Cada una entra con un recorte (<code>clip-path</code>) y un leve zoom ligados al scroll.</p>
+        </aside>
+      </div>
+      <figure class="city-fig shot">
+        <img src="img/ocean-drive.webp" width="928" height="1243" loading="lazy" alt="Avenida frente a la playa de noche, con hoteles art déco delineados en neón rosa, turquesa y violeta, y un convertible clásico estacionado.">
+        <figcaption>Avenida de la playa, 2:14 a. m.</figcaption>
+      </figure>
+    </section>
+
+    <!-- Leonida -->
+    <section class="leonida" id="leonida" aria-labelledby="t-leo">
+      <header class="sec-head">
+        <h2 id="t-leo" class="display reveal">El estado de <em class="grad">Leonida</em></h2>
+        <p class="reveal">Más allá de la ciudad: cayos unidos por puentes sobre el mar, pantanos sin fin y playas que nunca duermen.</p>
+      </header>
+      <ul class="places" role="list">
+        <li class="place" data-spot>
+          <img src="img/keys.webp" width="1264" height="848" loading="lazy" alt="Puente sobre el mar entre islas de manglar bajo la luna llena, con estelas de luz de autos.">
+          <div class="place-body">
+            <h3>Leonida Keys</h3>
+            <p>Una cadena de islas unidas por puentes interminables sobre agua turquesa.</p>
           </div>
-        </div>
-        <p class="plaque">Una página fan que se explica a sí misma: este recorrido cuenta cómo está construida, cómo se mueve y cómo llegó a tu pantalla.</p>
-      </div>
-
-      <div class="road" aria-hidden="true">
-        <div class="horizon">
-          <svg class="skyline" viewBox="0 0 1200 120" preserveAspectRatio="xMidYMax slice">
-            <path d="M0 120V92h40V70h22v22h18V58h30v34h16V40h12V22h8v18h12v52h26V76h34v16h20V48h40v44h18V64h22V30h14V12h6v18h14v62h28V80h30V56h24v36h26V70h18v22h36V44h28v48h16V26h10V8h6v18h10v66h30V62h26v30h22V78h40v14h18V50h32v42h20V68h26v24h30V36h18v56h24V74h28v18h34V60h22v32h26V46h36v46h20V82h40v38Z" fill="#050606"/>
-            <g fill="#e9b45a" opacity=".55">
-              <rect x="122" y="48" width="3" height="3"/><rect x="128" y="60" width="3" height="3"/><rect x="290" y="40" width="3" height="3"/><rect x="296" y="52" width="3" height="3"/><rect x="290" y="70" width="3" height="3"/><rect x="566" y="34" width="3" height="3"/><rect x="572" y="50" width="3" height="3"/><rect x="566" y="66" width="3" height="3"/><rect x="760" y="44" width="3" height="3"/><rect x="900" y="50" width="3" height="3"/><rect x="906" y="62" width="3" height="3"/><rect x="1040" y="56" width="3" height="3"/><rect x="430" y="56" width="3" height="3"/><rect x="190" y="56" width="3" height="3"/>
-            </g>
-          </svg>
-        </div>
-        <div class="road-plane">
-          <span class="edge edge--left"></span>
-          <span class="lane lane--a"></span>
-          <span class="lane lane--b"></span>
-          <span class="edge edge--right"></span>
-        </div>
-      </div>
-    </section>
-
-    <section class="exit approach" id="salida-1" aria-labelledby="t1">
-      <div class="sign" data-lit>
-        <div class="exit-tab">Salida <b>1</b></div>
-        <div class="sign-cols">
-          <div class="sign-text">
-            <h2 id="t1">Un viaje hacia el 19 de noviembre</h2>
-            <p>Esta es una página hecha por fans para contar los días que faltan para Grand Theft Auto VI. Pero su tema real es ella misma: cada cartel de esta autopista explica una parte de cómo fue diseñada, programada y publicada.</p>
-            <p>Rockstar Games anunció el lanzamiento para el 19 de noviembre de 2026 en PlayStation 5 y Xbox Series X|S. La historia ocurre en el estado de Leonida, con Vice City como ciudad principal, y sigue a Lucia y Jason.</p>
+        </li>
+        <li class="place" data-spot>
+          <img src="img/grassrivers.webp" width="1264" height="848" loading="lazy" alt="Pantano de juncos de noche, con un hidrodeslizador cuyo faro corta la niebla y una ciudad brillando en el horizonte.">
+          <div class="place-body">
+            <h3>Grassrivers</h3>
+            <p>Los humedales de Leonida: niebla, juncos y un faro solitario en el agua.</p>
           </div>
-          <dl class="distances" aria-label="Datos del lanzamiento">
-            <div><dt>Vice City</dt><dd><span data-cd="days">--</span> días</dd></div>
-            <div><dt>PlayStation 5</dt><dd>19.11.26</dd></div>
-            <div><dt>Xbox Series X|S</dt><dd>19.11.26</dd></div>
-            <div><dt>PC</dt><dd class="dim">Sin anunciar</dd></div>
-          </dl>
-        </div>
-      </div>
-    </section>
-
-    <section class="exit approach" id="salida-2" aria-labelledby="t2">
-      <div class="sign sign--blue" data-lit>
-        <div class="exit-tab">Salida <b>2</b></div>
-        <h2 id="t2">Tres archivos, cero frameworks</h2>
-        <p class="lede">Sin React, sin compiladores, sin paso de build. El navegador lee estos archivos tal cual, así que lo que ves es exactamente lo que está escrito.</p>
-        <ul class="services">
-          <li class="service" data-lit>
-            <span class="service-name">HTML</span>
-            <code>index.html</code>
-            <p>La estructura. Cada sección es un cartel con su número de salida, y el menú de arriba es el pórtico que los sostiene.</p>
-            <span class="service-size"><span data-size="index.html">…</span></span>
-          </li>
-          <li class="service" data-lit>
-            <span class="service-name">CSS</span>
-            <code>style.css</code>
-            <p>Los colores de la señalización vial, los bordes reflectivos, la carretera en 3D y todas las animaciones.</p>
-            <span class="service-size"><span data-size="style.css">…</span></span>
-          </li>
-          <li class="service" data-lit>
-            <span class="service-name">JS</span>
-            <code>script.js</code>
-            <p>El faro que sigue tu cursor, la cuenta regresiva, el poste de millas y el dibujo del código QR.</p>
-            <span class="service-size"><span data-size="script.js">…</span></span>
-          </li>
-        </ul>
-        <p class="note">La tipografía es Overpass, una fuente libre basada en Highway Gothic, la letra de los carteles de autopista de Estados Unidos. La única librería es qrcode-generator (licencia MIT), guardada en <code>/vendor</code>, que calcula los módulos del QR.</p>
-      </div>
-    </section>
-
-    <section class="exit exit--pavement approach" id="salida-3" aria-labelledby="t3">
-      <div class="pavement">
-        <div class="exit-tab exit-tab--road">Salida <b>3</b></div>
-        <h2 id="t3" class="painted">Así se mueve</h2>
-        <ol class="markers">
-          <li class="marker" tabindex="0">
-            <h3>El faro</h3>
-            <p>Tu cursor, o tu dedo, es un faro: donde apunta, el material reflectivo de los carteles se ilumina. En el celular, si no tocas la pantalla, pasa un auto cada pocos segundos.</p>
-          </li>
-          <li class="marker" tabindex="0">
-            <h3>Carteles que se acercan</h3>
-            <p>Al bajar, cada cartel llega desde la distancia con una animación ligada al scroll (<code>animation-timeline: view()</code>), sin librerías.</p>
-          </li>
-          <li class="marker" tabindex="0">
-            <h3>Carriles</h3>
-            <p>Las líneas de la carretera avanzan siempre, y más rápido cuanto más rápido haces scroll.</p>
-          </li>
-          <li class="marker" tabindex="0">
-            <h3>Hovers</h3>
-            <p>Al pasar el mouse los carteles se elevan, los botones reciben un destello reflectivo y el QR se escanea con una línea de luz.</p>
-          </li>
-        </ol>
-        <div class="calm">
-          <p>¿Prefieres menos movimiento? Apágalo aquí. La página también respeta la opción <em>reducir movimiento</em> de tu sistema.</p>
-          <button class="switch" type="button" id="calm" aria-pressed="false">
-            <span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span>
-            <span>Modo calma: <b data-calm-label>apagado</b></span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <section class="exit approach" id="salida-4" aria-labelledby="t4">
-      <div class="sign" data-lit>
-        <div class="exit-tab">Salida <b>4</b></div>
-        <h2 id="t4">Un carril para cada pantalla</h2>
-        <p class="lede">El diseño empieza en el celular, porque casi todos llegan escaneando el QR. Desde 720&nbsp;px los carteles ganan columnas, y desde 1100&nbsp;px el pórtico de arriba muestra todas las salidas.</p>
-        <ul class="lanes-list">
-          <li class="lane-sign" data-bp="0"><b>Celular</b><span>hasta 719 px</span><em>Estás aquí</em></li>
-          <li class="lane-sign" data-bp="720"><b>Tablet</b><span>720 a 1099 px</span><em>Estás aquí</em></li>
-          <li class="lane-sign" data-bp="1100"><b>Escritorio</b><span>1100 px o más</span><em>Estás aquí</em></li>
-        </ul>
-        <p class="readout">Tu pantalla ahora <b data-viewport>–</b></p>
-      </div>
-    </section>
-
-    <section class="exit approach" id="salida-5" aria-labelledby="t5">
-      <div class="sign sign--qr" data-lit>
-        <div class="exit-tab">Salida <b>5</b></div>
-        <div class="qr-grid">
-          <div>
-            <h2 id="t5">Comparte el viaje</h2>
-            <p class="lede">Apunta la cámara de otro celular a este código y la página se abre ahí. El QR se dibuja en tu navegador a partir de la dirección pública.</p>
-            <p class="qr-url"><span data-qr-source>Dirección</span> <a data-qr-link href="#">…</a></p>
-            <div class="actions">
-              <button class="btn" type="button" data-copy-url>
-                <svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>
-                <span>Copiar enlace</span>
-              </button>
-              <button class="btn btn--ghost" type="button" data-share>
-                <svg class="ico" aria-hidden="true"><use href="#i-share"/></svg>
-                <span>Compartir</span>
-              </button>
-            </div>
-            <p class="status" role="status" data-status></p>
+        </li>
+        <li class="place" data-spot>
+          <img src="img/beach.webp" width="928" height="1152" loading="lazy" alt="Torre de salvavidas iluminada con neón rosa y cian en una playa de noche, con la ciudad brillando al fondo.">
+          <div class="place-body">
+            <h3>Las playas</h3>
+            <p>La arena de Vice City de madrugada, con la ciudad encendida al fondo.</p>
           </div>
-          <figure class="qr">
-            <div class="qr-frame" data-qr role="img" aria-label="Código QR de esta página"></div>
-            <figcaption>Escanea con la cámara</figcaption>
-          </figure>
+        </li>
+      </ul>
+      <aside class="bts bts--wide reveal">
+        <h3>Cómo se hizo</h3>
+        <p>En el celular estas tarjetas se deslizan con <code>scroll-snap</code>. En escritorio, una luz sigue tu cursor sobre cada foto y la descripción sube al pasar el mouse.</p>
+      </aside>
+    </section>
+
+    <!-- Protagonistas -->
+    <section class="duo" id="protagonistas" aria-labelledby="t-duo">
+      <figure class="duo-fig">
+        <img src="img/duo.webp" width="928" height="1152" loading="lazy" alt="Dos personas de espaldas sentadas sobre el capó de un auto de los ochenta en una azotea, mirando la ciudad iluminada.">
+      </figure>
+      <div class="duo-text">
+        <h2 id="t-duo" class="display display--xl reveal"><span>Lucia</span> <em class="grad">&amp;</em> <span>Jason</span></h2>
+        <p class="reveal">Los dos protagonistas de GTA VI. Rockstar los presentó como una pareja que siempre supo que las cartas estaban en su contra, hasta que un golpe fácil sale mal y terminan en el lado más oscuro del lugar más soleado de Estados Unidos.</p>
+        <aside class="bts reveal">
+          <h3>Cómo se hizo</h3>
+          <p>La foto muestra a dos personas de espaldas a propósito: es un homenaje, no una copia de los personajes oficiales.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Cuenta regresiva -->
+    <section class="count" id="cuenta" aria-labelledby="t-count">
+      <h2 id="t-count" class="count-title reveal">Faltan</h2>
+      <div class="clock" role="timer" aria-live="off">
+        <div class="unit"><span class="num" data-cd="d">--</span><span class="lbl">días</span></div>
+        <div class="unit"><span class="num" data-cd="h">--</span><span class="lbl">horas</span></div>
+        <div class="unit"><span class="num" data-cd="m">--</span><span class="lbl">min</span></div>
+        <div class="unit"><span class="num" data-cd="s">--</span><span class="lbl">seg</span></div>
+      </div>
+      <p class="count-date reveal">19 de noviembre de 2026 <span>·</span> PlayStation 5 <span>·</span> Xbox Series X|S</p>
+      <p class="count-note reveal">El reloj usa la hora de tu dispositivo y se actualiza cada segundo.</p>
+    </section>
+
+    <!-- Cómo está hecha -->
+    <section class="how" id="como" aria-labelledby="t-how">
+      <header class="sec-head">
+        <h2 id="t-how" class="display reveal">Cómo está hecha <em class="grad">esta página</em></h2>
+        <p class="reveal">Sin frameworks ni paso de build. Lo que el navegador lee es exactamente lo que está escrito, y estos datos se miden en vivo.</p>
+      </header>
+      <dl class="specs">
+        <div class="spec">
+          <dt>Código</dt>
+          <dd>
+            <p>HTML, CSS y JavaScript puros en tres archivos. La única librería es qrcode-generator (MIT), guardada en <code>/vendor</code>.</p>
+            <p class="live" data-sizes>Midiendo archivos…</p>
+          </dd>
         </div>
+        <div class="spec">
+          <dt>Imágenes</dt>
+          <dd>
+            <p>Seis fotos generadas con IA, convertidas a WebP para que carguen rápido al abrir el QR con datos móviles.</p>
+            <p class="live" data-imgs>Midiendo imágenes…</p>
+          </dd>
+        </div>
+        <div class="spec">
+          <dt>Movimiento</dt>
+          <dd>
+            <p>Zoom a través de las letras VI al inicio, recortes y parallax en las fotos, luz que sigue al cursor, menú con vista previa y números que ruedan en la cuenta regresiva.</p>
+            <button class="switch" type="button" id="calm" aria-pressed="false">
+              <span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span>
+              <span>Modo calma: <b data-calm-label>apagado</b></span>
+            </button>
+          </dd>
+        </div>
+        <div class="spec">
+          <dt>Responsive</dt>
+          <dd>
+            <p>Pensada primero para el celular. Desde 720&nbsp;px los lugares de Leonida se ponen en fila y desde 900&nbsp;px las secciones se abren en columnas. En el celular, la portada usa un recorte vertical de la misma foto.</p>
+            <p class="live">Tu pantalla ahora: <b data-viewport>–</b></p>
+          </dd>
+        </div>
+        <div class="spec">
+          <dt>Tipografía</dt>
+          <dd><p>Big Shoulders Display para los títulos, condensada como los carteles de la ciudad, y Hanken Grotesk para leer.</p></dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- Compartir -->
+    <section class="share" id="compartir" aria-labelledby="t-share">
+      <div class="share-bg" aria-hidden="true"><img src="img/beach.webp" alt="" loading="lazy"></div>
+      <div class="share-inner">
+        <div class="share-text">
+          <h2 id="t-share" class="display reveal">Pásala <em class="grad">por QR</em></h2>
+          <p class="reveal">Apunta la cámara de otro celular al código y la página se abre ahí. El QR se dibuja en tu navegador con la dirección de esta misma página.</p>
+          <p class="qr-url"><span data-qr-source>Dirección</span> <a data-qr-link href="#">…</a></p>
+          <div class="actions">
+            <button class="btn btn--grad" type="button" data-copy-url>
+              <svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg><span>Copiar enlace</span>
+            </button>
+            <button class="btn btn--line" type="button" data-share>
+              <svg class="ico" aria-hidden="true"><use href="#i-share"/></svg><span>Compartir</span>
+            </button>
+          </div>
+          <p class="status" role="status" data-status></p>
+        </div>
+        <figure class="qr">
+          <div class="qr-frame" data-qr role="img" aria-label="Código QR de esta página"></div>
+          <figcaption>Escanea con la cámara</figcaption>
+        </figure>
       </div>
     </section>
 
-    <section class="exit approach" id="salida-6" aria-labelledby="t6">
-      <div class="sign sign--brown" data-lit>
-        <div class="exit-tab">Salida <b>6</b></div>
-        <h2 id="t6">Del escritorio a GitHub Pages</h2>
-        <ol class="route">
-          <li>
-            <h3>Servidor local</h3>
-            <p>Doble clic en <code>iniciar-servidor.bat</code>. Arranca Python en el puerto 8000 y abre el navegador con la IP de tu red, así el QR funciona en cualquier celular conectado al mismo Wi-Fi.</p>
-          </li>
-          <li>
-            <h3>Repositorio</h3>
-            <p>Crea un repositorio vacío en github.com y ejecuta <code>publicar-github.bat</code>: pide tu usuario y el nombre del repo, los conecta y sube los archivos.</p>
-          </li>
-          <li>
-            <h3>GitHub Pages</h3>
-            <p>En el repositorio entra a Settings, luego Pages, y elige la rama <code>main</code> con la carpeta raíz. En un minuto la página vive en <code>tu-usuario.github.io/nombre-del-repo</code> y el QR apunta ahí solo.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="end approach" aria-labelledby="t-end">
-      <div class="end-sign" data-lit>
-        <h2 id="t-end"><span>Fin de la</span> autopista</h2>
-        <p>Nos vemos en Vice City el 19 de noviembre.</p>
-        <a class="btn btn--dark" href="#top">
-          <svg class="ico" aria-hidden="true"><use href="#i-up"/></svg>
-          Volver al inicio
-        </a>
-      </div>
+    <!-- Publicación -->
+    <section class="ship" id="publicar" aria-labelledby="t-ship">
+      <header class="sec-head">
+        <h2 id="t-ship" class="display reveal">Del escritorio <em class="grad">a internet</em></h2>
+      </header>
+      <ol class="steps">
+        <li class="reveal">
+          <h3>Servidor local</h3>
+          <p>Doble clic en <code>iniciar-servidor.bat</code>. Arranca Python en el puerto 8000 y abre la página con la IP de tu red, así el QR funciona en cualquier celular del mismo Wi-Fi.</p>
+        </li>
+        <li class="reveal">
+          <h3>GitHub</h3>
+          <p>Crea un repositorio vacío y ejecuta <code>publicar-github.bat</code>: pide tu usuario, conecta el repo y sube los archivos.</p>
+        </li>
+        <li class="reveal">
+          <h3>GitHub Pages</h3>
+          <p>En Settings, Pages, elige la rama <code>main</code> y la carpeta raíz. En un minuto vive en <code>tu-usuario.github.io/el-repo</code> y el QR apunta ahí solo.</p>
+        </li>
+      </ol>
     </section>
   </main>
 
   <footer class="foot">
-    <p>Proyecto de fans, sin fines comerciales. No está afiliado con Rockstar Games ni con Take-Two Interactive. Grand Theft Auto es una marca de Take-Two Interactive Software.</p>
+    <p class="foot-vi" aria-hidden="true">VI</p>
+    <p class="foot-line">Nos vemos en Vice City el 19 de noviembre.</p>
+    <a class="btn btn--line" href="#top"><svg class="ico" aria-hidden="true"><use href="#i-up"/></svg> Volver arriba</a>
+    <p class="foot-legal">Proyecto de fans sin fines comerciales. No está afiliado con Rockstar Games ni con Take-Two Interactive. Grand Theft Auto es una marca de Take-Two Interactive Software. Imágenes originales generadas con IA.</p>
   </footer>
-
-  <div class="milepost" aria-hidden="true">
-    <span>Milla</span>
-    <b data-mile>0.0</b>
-  </div>
 
   <script src="vendor/qrcode.js" defer></script>
   <script src="script.js" defer></script>

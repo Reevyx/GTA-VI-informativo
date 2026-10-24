@@ -1,6 +1,6 @@
-# Rumbo a Vice City · GTA VI (página fan)
+# Vice City de noche · GTA VI (página fan)
 
-Página de una sola pantalla con temática del lanzamiento de GTA VI (19 de noviembre de 2026) que se explica a sí misma. HTML, CSS y JS puros.
+Página fan del lanzamiento de GTA VI (19 de noviembre de 2026) ambientada en Vice City de noche: entrada por las letras VI, lugares de Leonida, Lucia y Jason, cuenta regresiva, QR y una sección que explica cómo está hecha. HTML, CSS y JS puros.
 
 ## Probar en local
 
@@ -18,6 +18,8 @@ La página queda en `https://TU-USUARIO.github.io/NOMBRE-DEL-REPO/`.
 
 - `index.html`, `style.css`, `script.js`: la página.
 - `vendor/qrcode.js`: qrcode-generator de Kazuhiko Arase (MIT).
+- `img/`: fotos originales generadas con IA (Higgsfield) en WebP; cada una con su prompt en `.webp.json`.
+- `servidor.py`: servidor local que usa el `.bat` (más estable que `python -m http.server` en Windows).
 - `PRODUCT.md`, `DESIGN.md`: contexto de producto y sistema visual.
 
-Proyecto de fans sin fines comerciales. No afiliado con Rockstar Games ni Take-Two Interactive.
+Proyecto de fans sin fines comerciales. No afiliado con Rockstar Games ni Take-Two Interactive. No usa logos, arte ni imágenes oficiales.

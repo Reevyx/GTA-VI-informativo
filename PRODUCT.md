@@ -30,9 +30,13 @@ A self-documenting page: the launch theme is the costume, the page's own constru
 - Unofficial fan project: no Rockstar Games logos, trademarks used as branding, or official artwork. Must state it is not affiliated with Rockstar Games or Take-Two.
 - Launch facts limited to publicly announced information (release date November 19, 2026; PS5 and Xbox Series X|S; state of Leonida / Vice City; protagonists Lucia and Jason). Assumption from public announcements, to verify.
 
+## Brand Commitments
+
+User-pinned (2026-10-24): Vice City at night ambience in the spirit of the official GTA VI website (rockstargames.com/VI), without its logo, key art or character likeness. Content mixes the official-site structure (Vice City, Leonida places, Lucia & Jason, countdown) with how each part of the page was built.
+
 ## Evidence on Hand
 
-No official assets. All imagery is authored for this page (CSS/SVG/canvas). No testimonials, stats, or pre-order claims may be invented.
+No official assets. Six original images generated with Higgsfield for this page (img/, prompts in img/*.webp.json); people only from behind. No testimonials, stats, or pre-order claims may be invented.
 
 ## Product Principles
 
