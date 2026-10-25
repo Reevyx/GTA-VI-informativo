@@ -2,6 +2,8 @@
 
 Página fan del lanzamiento de GTA VI (19 de noviembre de 2026) ambientada en Vice City de noche: entrada por las letras VI, lugares de Leonida, Lucia y Jason, cuenta regresiva, QR y una sección que explica cómo está hecha. HTML, CSS y JS puros.
 
+**Ver la página:** https://reevyx.github.io/GTA-VI-informativo/
+
 ## Probar en local
 
 Doble clic en `iniciar-servidor.bat`. Abre el navegador con la IP de tu red (por ejemplo `http://192.168.x.x:8000/`), así el QR de la página funciona en cualquier celular conectado al mismo Wi-Fi. Puerto distinto: `iniciar-servidor.bat 9000`.
